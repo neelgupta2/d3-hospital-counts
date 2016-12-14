@@ -15,7 +15,7 @@ Included script and source in root folder.
 Basic line graph displaying all hospital visits for Asthma (Age 2-17) in California between 2005 and 2014.
 
 # circlePacking.js
-Inspiration: http://bl.ocks.org/mbostock/4063530
-Goal: Display number of people with each condition in data set in 2014 out of total population that year.
-Big Circle: total population
-Smaller Circles: count of people who visited hospital for each condition
+- Inspiration: http://bl.ocks.org/mbostock/4063530
+- Goal: Display number of people with each condition in data set in 2014 out of total population that year.
+- Big Circle: total population
+- Smaller Circles: count of people who visited hospital for each condition

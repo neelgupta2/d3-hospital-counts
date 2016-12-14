@@ -1,36 +1,35 @@
-const data = 'https://chhs.data.ca.gov/api/views/6hmm-zzc6/rows.json'
+var data = './Hospitalization_Counts_and_Rates_of_Preventable_Hospitalizations__Under_18__for_Selected_Medical_Conditions_by_California_County__2005-2014.csv'
 
 const parseDate = d3.timeParse('%Y')
 
-const height = 200
-const width = 500
-const margin = {left: 50, right: 50, top: 40, bottom: 40}
+d3.csv(data)
+	.row((d) => {
+		return {
+			year: d['Year'],
+			county: d['County'],
+			description: d['Pediatric Quality Indicator Description'],
+			totalPop: Number(d['Population']),
+			count: Number(d['Count'])
+		}
+	})
+	.get((error, data) => {
+		if (error) throw error;
 
-const tree = d3.tree().size([width, height])
+		data = data.filter((d) => {
+			return d.county === 'STATEWIDE' && d.year === '2014';
+		})
+		console.log(data)
 
-const svg = d3.select('body').append('svg').attr('width', '100%').attr('height', '100%')
-const chartGroup = svg.append('g').attr('transform', 'translate('+margin.left+','+margin.top+')')
+	const svg = d3.select('body').append('svg').attr('height', '100%').attr('width', '100%')
 
-d3.json(data).get((error, data) => {
-	console.log(data.meta.view)
-	var root = d3.hierarchy(data.meta)
-	tree(root)
-
-	chartGroup.selectAll('circle')
-		.data(root.descendants())
-		.enter().append('circle')
-		          .attr("cx",(d) => { return d.x; })
-		          .attr("cy",(d) => { return d.y; })
-		          .attr("r","5")
-
-	chartGroup.selectAll('path')
-		.data(root.descendants().slice(1))
-		.enter().append('path')
-					.attr('class', 'link')
-					.attr('d', (d) => {
-						return "M"+d.x+","+d.y+"C"+d.x+","+(d.parent.y+d.y)/2+" "+d.parent.x+","+(d.y+d.parent.y)/2+" "+d.parent.x+","+d.parent.y;
-					})
+	svg.selectAll('circle.first')
+			.data(data)
+			.enter().append('circle')
+						.attr('class', 'first')
+						.attr('fill', 'indianred')
+						.attr('cx', '50')
+						.attr('cy', '50')
+						.attr('r', (d) => { return d.totalPop / 100000; })
 
 
 })
-

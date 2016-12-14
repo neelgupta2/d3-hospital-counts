@@ -12,3 +12,13 @@ path {
   fill: none;
   stroke-width: 2px;
 }
+
+circle {
+  fill: indianred;
+}
+
+text {
+  font-family: arial;
+  fill: white;
+  font-size: 11px;
+}

@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+line {
+  stroke: red;
+}
+
+path {
+  stroke: green;
+  fill: none;
+  stroke-width: 2px;
+}

@@ -12,8 +12,8 @@ const svg = d3.select('body').append('svg').attr('width', '100%').attr('height',
 const chartGroup = svg.append('g').attr('transform', 'translate('+margin.left+','+margin.top+')')
 
 d3.json(data).get((error, data) => {
-	console.log(data.meta.view)
 	var root = d3.hierarchy(data.meta)
+	console.log(root.data.view.columns)
 	tree(root)
 
 	chartGroup.selectAll('circle')

@@ -22,12 +22,15 @@ d3.csv(data)
 
 	const svg = d3.select('body').append('svg').attr('height', '100%').attr('width', '100%')
 
+	var newX = 200;
 	svg.selectAll('circle.first')
 			.data(data)
 			.enter().append('circle')
 						.attr('class', 'first')
-						.attr('fill', 'indianred')
-						.attr('cx', '50')
+						.attr('cx', (d, i) => {
+							newX += d.year / 10;
+							return newX;
+						})
 						.attr('cy', '50')
 						.attr('r', (d) => { return d.totalPop / 100000; })
 
